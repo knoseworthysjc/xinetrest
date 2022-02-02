@@ -1,5 +1,9 @@
-function uploadfile($server,$user,$pass,$src,$pth,$overwrite='false')
+function uploadfile($src,$pth,$overwrite='false')
 {
+    
+    $user = $Env:xinetuser;
+    $pass = $Env:xinetpass;
+    $server = $Env:xinetserver;
     
 $file = Get-Item -Path "$src" 
 
