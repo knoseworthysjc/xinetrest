@@ -10,9 +10,9 @@ $log = "$inFolder"+"\Log\"+$date.ToString()+".log"
 Add-Content -Path $log -Value $time.ToString()
 $files = Get-ChildItem -Path $inFolder -Filter "*.eps"
 
-$user = "xinetarchive";
-$pass = "5jcAdmin!";
-$server = "https://xinetapi.stjosephcontent.com/webnative/portalDI/";
+$user = $Env:xinetuser;
+$pass = $Env:xinetpassword;
+$server = $Env:xinetserver;
 $pth = "/vol04/Sobeys_Assets/Sobeys_SMT/"
 
 foreach($file in $files)
