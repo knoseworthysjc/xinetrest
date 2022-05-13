@@ -29,8 +29,8 @@ foreach($file in $files)
 {        
     $n = $file.Name
     $fn = $file.FullName
-    $fp = $fn.replace("\\10.136.209.199","\vol04").replace("\","/")
-    $mp = $fn.replace("\\10.136.209.199\","").replace("\",":") 
+    $fp = [System.Web.HttpUtility]::UrlDecode($fn.replace("\\10.136.209.199","\vol04").replace("\","/"))
+    $mp = [System.Web.HttpUtility]::UrlDecode($fn.replace("\\10.136.209.199\","").replace("\",":"))
     $n_ary = $n.Split("_")
     $banner = $n_ary[0]
     $week = $n_ary[1].replace("WK","")

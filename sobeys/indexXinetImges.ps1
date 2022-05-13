@@ -30,8 +30,8 @@ foreach($file in $files)
     $n = $file.Name
     $fn = $file.FullName
     $item = $n.Split(".")[0].Split("_")[0]
-    $fp = $fn.replace("\\10.136.209.199","\vol04").replace("\","/")
-    $mp = $fn.replace("\\10.136.209.199\","").replace("\",":") 
+    $fp = [System.Web.HttpUtility]::UrlDecode($fn.replace("\\10.136.209.199","\vol04").replace("\","/"))
+    $mp = [System.Web.HttpUtility]::UrlDecode($fn.replace("\\10.136.209.199\","").replace("\",":"))
     
     $url = "$server"+"action=fileinfo&path=$fp";
     $request = Invoke-WebRequest -Method "GET" -uri $url -Headers $headers -ContentType "application/json"
@@ -42,7 +42,7 @@ foreach($file in $files)
     
     $file_id = $response[0].FILE_ID;
     try {
-    Add-PnPListItem -list "xinet_images" -values @{item_number=$item;Title=$n;fullpath=$fp;macpath=$mp;pcpath=$fn;xinet_id=$file_id;}
+        Add-PnPListItem -list "xinet_images" -values @{item_number=$item;Title=$n;fullpath=$fp;macpath=$mp;pcpath=$fn;xinet_id=$file_id;}
     } catch {
         v = @{item_number=$item;Title=$n;fullpath=$fp;macpath=$mp;pcpath=$fn;xinet_id=$file_id;}
         v
