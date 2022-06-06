@@ -1,7 +1,8 @@
 
 $team = "SobeysContent"
 $url = "https://sjccontent.sharepoint.com/teams/$team"
-$conn = Connect-PnPOnline -Url $url -interactive
+$conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sharepointclientid" -Thumbprint "$Env:sharepointthumbprint"  -url $url
+#Import-PfxCertificate -Exportable -CertStoreLocation Cert:\LocalMachine\My -FilePath .\pnp.pfx #Install certificate
 
 
 $list = "xinet_images"

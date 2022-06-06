@@ -1,2 +1,4 @@
 credentials
 deploy.ps1
+pnp.cer
+pnp.pfx
