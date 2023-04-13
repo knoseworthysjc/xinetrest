@@ -15,7 +15,8 @@ function uploadSharepoint($inFolder, $spFolder, $inc)
         
         $category = $inFolder.split("\") | Select-Object -Last 2 | Select-Object -First 1
         $sp = "Product Images\$category"
-        $values = @{Title="$n";local_path="$fn";product_category="$category"}
+        $xinetPath = $fn.replace("\","/").replace("//10.136.209.199","/vol04")
+        $values = @{Title="$n";local_path="$xinetPath";product_category="$category"}
         
         Add-PnPFile -Path "$fn" -Folder "$sp" -Values $values       
         }
