@@ -5,7 +5,7 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 function uploadSharepoint($inFolder, $spFolder, $inc)
 {
     $inc    
-    $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromDays(2))
+    $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromHours(1))
         $files = Get-ChildItem -Path $inFolder -Include $inc | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
         write-Host("Total Files:" + $files.length)
         foreach($file in $files)
@@ -31,7 +31,7 @@ foreach($file in $files)
 
     }
     #>
-$inc = "*.tif","*.jpg,","*.jpeg,","*.eps,"
-$incb = "*.ai","*.tif","*.jpg,","*.eps,","*.jpeg"
+$inc = "*.tif","*.jpg","*.jpeg","*.eps"
+$incb = "*.ai","*.tif","*.jpg","*.eps","*.jpeg"
 uploadSharepoint "\\10.136.209.199\HomeDepot\Master Assets\Product_Images\*.*" "product_images" $inc
 uploadSharepoint "\\10.136.209.199\HomeDepot\Master Assets\Logos\*.*" "Logos" $incb
