@@ -36,7 +36,7 @@ foreach($file in $files)
 
     }
     #>
-$inc = "*.tif","*.psd","*.jpg","*.jpeg","*.eps"
+$inc = "*.tif","*.psd","*.jpg"
 
 $paths = Get-ChildItem "\\10.136.209.199\Highland_Farms\Highland_Farms_Assets\" 
 foreach($f in $paths)
