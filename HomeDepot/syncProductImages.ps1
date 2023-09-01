@@ -19,7 +19,7 @@ function uploadSharepoint($inFolder, $spFolder, $inc)
 $inFolder = "\\10.136.209.199\HomeDepot\Master Assets\Product_Images\*.*"
 $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromHours(1))
 #$files = Get-ChildItem -Path $inFolder -Filter "*.tif" | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
-$files = Get-ChildItem -Path $inFolder -Include "*.tif","*.jpg" | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
+$files = Get-ChildItem -Path $inFolder -Include "*.tif","*.jpg","*.jpeg" | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
 
 foreach($file in $files)
     {        
