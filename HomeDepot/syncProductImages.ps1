@@ -4,7 +4,12 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 
 function uploadSharepoint($inFolder, $spFolder, $inc)
 {
+<<<<<<< HEAD
         $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromMinutes(10))
+=======
+    $inc    
+    $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromDays(2))
+>>>>>>> 881e2f67a66e6ba5b00e453da09d195050f9aab2
         $files = Get-ChildItem -Path $inFolder -Include $inc | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
         write-Host("Total Files:" + $files.length)
         foreach($file in $files)
@@ -19,7 +24,7 @@ function uploadSharepoint($inFolder, $spFolder, $inc)
 $inFolder = "\\10.136.209.199\HomeDepot\Master Assets\Product_Images\*.*"
 $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromHours(1))
 #$files = Get-ChildItem -Path $inFolder -Filter "*.tif" | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
-$files = Get-ChildItem -Path $inFolder -Include "*.tif","*.jpg" | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
+$files = Get-ChildItem -Path $inFolder -Include "*.tif","*.jpg","*.jpeg" | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
 
 foreach($file in $files)
     {        
@@ -31,6 +36,8 @@ foreach($file in $files)
     }
     #>
 $inc = "*.tif","*.jpg","*.eps","*.psd","*.jpeg","*.tiff"
-$incb = "*.ai","*.tif"
+$incb = "*.ai","*.tif","*.jpg,","*.eps,","*.jpeg"
+
+
 uploadSharepoint "\\10.136.209.199\HomeDepot\Master Assets\Product_Images\*.*" "product_images" $inc
 uploadSharepoint "\\10.136.209.199\HomeDepot\Master Assets\Logos\*.*" "Logos" $incb
