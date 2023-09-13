@@ -4,12 +4,7 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 
 function uploadSharepoint($inFolder, $spFolder, $inc)
 {
-<<<<<<< HEAD
         $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromMinutes(10))
-=======
-    $inc    
-    $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromDays(2))
->>>>>>> 881e2f67a66e6ba5b00e453da09d195050f9aab2
         $files = Get-ChildItem -Path $inFolder -Include $inc | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
         write-Host("Total Files:" + $files.length)
         foreach($file in $files)
