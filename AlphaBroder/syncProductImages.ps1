@@ -68,9 +68,9 @@ foreach($f in $files)
             }}
     }
     if ($f.Extension -eq ".eps") {
-        magick -density 72 -colorspace RGB "$fn" "$tmp"
+        magick -density 72 -colorspace RGB -layers flatten "$fn" "$tmp"
     }else{
-        magick -density 72 -colorspace RGB "$fn" "$tmp"
+        magick -density 72 -colorspace RGB -layers flatten "$fn" "$tmp"
     }
     $spfolder = "Assets/Style Images/$brand/"+$data["style_item_number"]
     Add-PnPFile -Path "$tmp" -Folder "$spfolder" -ContentType "style_item_asset" -values $data 
