@@ -65,7 +65,7 @@ foreach($f in $files)
                     "TOP" {"Top"}
                     default {"Other"}
                 };
-            }
+            }}
     }
     if ($f.Extension -eq ".eps") {
         magick -density 72 -colorspace RGB "$fn" "$tmp"
