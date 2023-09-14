@@ -5,7 +5,7 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 $inc = "*.tif","*.jpg","*.eps","*.psd","*.jpeg","*.tiff"
 $upperBound = [DateTime]::Now.Subtract([TimeSpan]::FromMinutes(15))
 #$files = Get-ChildItem -Path $inFolder -Include $inc -recurse | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
-$files = Get-ChildItem -Path "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Columbia\*" -Include $inc | Select Name,FullName,LastWriteTime
+$files = Get-ChildItem -Path "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Spyder\*" -Include $inc | Select Name,FullName,LastWriteTime
 
 foreach($f in $files)
 {
@@ -46,7 +46,26 @@ foreach($f in $files)
             } 
         }
     } else {
-        $data["style_item_number"] = $imgDetails[0]
+        $data["style_item_number"] = $imgDetails[0];
+        switch ($imgDetails.Length) {
+            2 { 
+                $data["color_code"]=$imgDetails[1];
+                $data["imageangle"]="Front"
+            }
+            default  { 
+                $data["color_code"]=$imgDetails[3];
+                $data["imageangle"]=switch($imgDetails[2].ToUpper()){
+                    "BK" {"Back"} 
+                    "SD" {"Side"}
+                    "OF1" {"Off Figure"}
+                    "LSD" {"Left Side"}
+                    "QRT" {"Quarter"}
+                    "FF" {"Flat Front"}
+                    "FB" {"Flat Back"}
+                    "TOP" {"Top"}
+                    default {"Other"}
+                };
+            }
     }
     if ($f.Extension -eq ".eps") {
         magick -density 72 -colorspace RGB "$fn" "$tmp"
