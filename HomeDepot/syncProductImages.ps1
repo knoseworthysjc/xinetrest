@@ -31,7 +31,9 @@ foreach($file in $files)
 
     }
     #>
-$inc = "*.tif","*.jpg","*.jpeg","*.eps"
-$incb = "*.ai","*.tif","*.jpg","*.eps","*.jpeg"
+$inc = "*.tif","*.jpg","*.eps","*.psd","*.jpeg","*.tiff"
+$incb = "*.ai","*.tif","*.jpg,","*.eps,","*.jpeg"
+
+
 uploadSharepoint "\\10.136.209.199\HomeDepot\Master Assets\Product_Images\*.*" "product_images" $inc
 uploadSharepoint "\\10.136.209.199\HomeDepot\Master Assets\Logos\*.*" "Logos" $incb
