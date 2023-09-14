@@ -76,5 +76,5 @@ foreach($f in $files)
     Add-PnPFile -Path "$tmp" -Folder "$spfolder" -ContentType "style_item_asset" -values $data 
     Remove-Item "$tmp"
 }
-
+#$asdfasdf
 Disconnect-PnPOnline
