@@ -4,8 +4,7 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 
 #$files = Get-ChildItem -Path $inFolder -Include $inc -recurse | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
 
-$paths = @("\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\A4",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\PRIME LINE\Writing",
+$paths = @(
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AAA - cover colour wheel",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ACCESSORIES",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Adams",
@@ -204,7 +203,7 @@ foreach($f in $files)
     magick "$fn" -density 72 -colorspace RGB -layers merge -resize 1500x1500 -quality 100 "$tmp"
     Add-PnPFile -Path "$tmp" -Folder "$spfolder" -ContentType "style_item_asset" -values $data 
     Remove-Item "$tmp"
-    $spfolder
+    
 }
 }
 
