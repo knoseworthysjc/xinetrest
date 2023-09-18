@@ -5,14 +5,6 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 #$files = Get-ChildItem -Path $inFolder -Include $inc -recurse | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
 
 $paths = @(
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AUTHENTIC PIGMENT",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AWDIS",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Backpacker",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BADGER",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BAGedge",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BAGS",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BAYSIDE",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BELLA & CANVAS",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Berne",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BIG XSO",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\BLANKS",
@@ -130,13 +122,13 @@ foreach($f in $files)
     $fn = $f.FullName
     $pth = $f.FullName
     $nn = $n.split(".")[0]
-    $tmp = "$env:TEMP\$nn.png"
+    $tmp = "$env:TEMP\$nn.jpg"
     
     
     $values = @{Title="$n";local_path="$fn";}
     
     $imgDetails = $n.replace("_z","").split(".")[0].replace("-","_").replace(" ","_").split("_")
-    $data = @{Title="$nn.png";local_path="$fn";local_name="$n";update_metainfo=1;}
+    $data = @{Title="$nn.jpg";local_path="$fn";local_name="$n";update_metainfo=1;}
     $data["imageangle"]=& {
         if ($n -like "*BK*") {
             "Back"
@@ -190,7 +182,7 @@ foreach($f in $files)
         $spfolder = "Assets/Styles/$brand/"+$data["style_item_number"]
     }
     
-    magick "$fn" -density 72 -colorspace RGB -layers merge -resize 1500x1500 -quality 100 "$tmp"
+    magick "$fn" -density 72 -colorspace RGB -layers merge -resize 1500x1500 -quality 100 -define jpeg:extent=10MB "$tmp"
     Add-PnPFile -Path "$tmp" -Folder "$spfolder" -ContentType "style_item_asset" -values $data 
     Remove-Item "$tmp"
     
