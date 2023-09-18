@@ -5,16 +5,6 @@ $conn = Connect-PnPOnline -Tenant sjccontent.onmicrosoft.com -ClientId "$Env:sha
 #$files = Get-ChildItem -Path $inFolder -Include $inc -recurse | Where { ! $_.PSIsContainer -and $_.LastWriteTime -gt $upperBound} | Select Name,FullName,LastWriteTime
 
 $paths = @(
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AAA - cover colour wheel",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ACCESSORIES",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Adams",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ADIDAS",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ALO SPORT",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ALSTYLE",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ALTERNATIVE",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AMERICAN APPAREL",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\ANVIL",
-"\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AUGUSTA",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AUTHENTIC PIGMENT",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\AWDIS",
 "\\10.3.0.39\Alpha Broder\ALPHA BRODER IMAGES\Backpacker",
@@ -145,7 +135,7 @@ foreach($f in $files)
     
     $values = @{Title="$n";local_path="$fn";}
     
-    $imgDetails = $n.replace("_z","").split(".")[0].split("_").replace("-","_").replace(" ","_")
+    $imgDetails = $n.replace("_z","").split(".")[0].replace("-","_").replace(" ","_").split("_")
     $data = @{Title="$nn.png";local_path="$fn";local_name="$n";update_metainfo=1;}
     $data["imageangle"]=& {
         if ($n -like "*BK*") {
